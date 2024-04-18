@@ -100,29 +100,114 @@
     </div>
 </div>
 
-<div id="countdown"></div>
+<canvas id="fireworksCanvas"></canvas>
 
 <script>
-// Get today's date
-const today = new Date();
+    // Fireworks animation function
+    function fireworksAnimation() {
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
 
-// Set the birthday date
-const birthday = new Date("May 5, 2024");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-// Calculate the difference in milliseconds between today and birthday
-const difference = birthday - today;
+        // Particle class
+        class Particle {
+            constructor() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height;
+                this.vx = Math.random() * 10 - 5;
+                this.vy = Math.random() * -15 - 10;
+                this.gravity = 0.2;
+                this.alpha = 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
 
-// Convert milliseconds to days, hours, minutes, and seconds
-const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += this.gravity;
+                this.alpha -= 0.01;
+            }
 
-// Display the countdown timer
-document.getElementById("countdown").innerHTML = `
-  <p>Countdown to your birthday:</p>
-  <p>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</p>
-`;
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.alpha;
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        function createParticles() {
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animate particles
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
+                if (particle.alpha <= 0) {
+                    particles.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        // Start animation
+        createParticles();
+        animateParticles();
+    }
+
+    fireworksAnimation(); // Start the fireworks animation
+
+    // Function to calculate next birthday
+    function getNextBirthday() {
+        // Get today's date
+        const today = new Date();
+
+        // Set the next birthday date (assuming next birthday is in 2022)
+        let nextBirthdayYear = today.getFullYear();
+        const birthdayMonth = 4; // May is 4th month (0-indexed)
+        const birthdayDay = 5;
+        let nextBirthday = new Date(nextBirthdayYear, birthdayMonth, birthdayDay);
+
+        // If next birthday has already passed this year, set it to next year
+        if (today.getTime() > nextBirthday.getTime()) {
+            nextBirthdayYear++;
+            nextBirthday = new Date(nextBirthdayYear, birthdayMonth, birthdayDay);
+        }
+
+        return nextBirthday;
+    }
+
+    // Function to calculate countdown
+    function calculateCountdown() {
+        const nextBirthday = getNextBirthday();
+        const difference = nextBirthday - new Date();
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `
+            <p>Countdown to your next birthday:</p>
+            <p>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</p>
+        `;
+    }
+
+    // Call calculateCountdown every second
+    calculateCountdown();
+    setInterval(calculateCountdown, 1000);
 </script>
 
 </body>
