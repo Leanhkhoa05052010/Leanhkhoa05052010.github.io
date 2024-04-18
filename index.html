@@ -21,7 +21,7 @@
             background-color: #fff;
             border: 2px solid #ccc;
             padding: 20px;
-            margin: 0 auto;
+            margin: 20px auto;
             width: 300px;
             text-align: center;
         }
@@ -31,8 +31,6 @@
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            position: fixed;
-            bottom: 0;
             width: 100%;
         }
 
@@ -45,6 +43,18 @@
         .language-select {
             text-align: center;
             margin: 20px 0;
+        }
+
+        .version-box {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            padding: 10px;
+            margin: 20px auto;
+            width: 200px;
+            text-align: center;
+            position: fixed;
+            bottom: 20px; /* Adjust the distance from the bottom as needed */
+            left: 20px; /* Adjust the distance from the left as needed */
         }
     </style>
 </head>
@@ -64,6 +74,10 @@
     <div class="info-box" id="info-box">
         <h2 id="name">Anh Khoa Le</h2>
         <p id="dob">Date of Birth: May 5, 2010</p>
+    </div>
+
+    <div class="version-box">
+        <p>Version 0.1 beta</p> <!-- You can change the version number here -->
     </div>
 
     <footer>
