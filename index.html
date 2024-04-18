@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi"> <!-- Change the language code to 'vi' for Vietnamese -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông Tin Về Lê Anh Khoa</title> <!-- Translate the title -->
+    <title>My Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -50,27 +50,42 @@
 </head>
 <body>
     <div class="header">
-        <h1>Thông Tin Về Lê Anh Khoa</h1> <!-- Translate the heading -->
+        <h1 id="title">Welcome to My Website</h1>
     </div>
 
     <div class="language-select">
-        <label for="language">Chọn Ngôn Ngữ:</label> <!-- Translate the label -->
-        <select id="language">
+        <label for="language">Select Language:</label>
+        <select id="language" onchange="changeLanguage()">
             <option value="en">English</option>
-            <option value="vn" selected>Vietnamese</option> <!-- Set Vietnamese as default -->
-            <!-- Add more options for other languages if needed -->
+            <option value="vn">Vietnamese</option>
         </select>
     </div>
 
-    <div class="info-box">
-        <h2>Lê Anh Khoa</h2>
-        <p>Ngày Sinh: 5 tháng 5, 2010</p> <!-- Translate the content -->
+    <div class="info-box" id="info-box">
+        <h2 id="name">Your Name</h2>
+        <p id="dob">Date of Birth: May 5, 2010</p>
     </div>
 
     <footer>
-        <a href="#home">Trang Chủ</a> <!-- Translate the links -->
-        <a href="#about">Về Chúng Tôi</a>
-        <a href="#contact">Liên Hệ</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
     </footer>
+
+    <script>
+        function changeLanguage() {
+            var language = document.getElementById("language").value;
+
+            if (language === "vn") {
+                document.getElementById("title").innerText = "Chào mừng đến với Trang Web của Tôi";
+                document.getElementById("name").innerText = "Lê Anh Khoa";
+                document.getElementById("dob").innerText = "Ngày Sinh: 5 Tháng 5, 2010";
+            } else {
+                document.getElementById("title").innerText = "Welcome to My Website";
+                document.getElementById("name").innerText = "Your Name";
+                document.getElementById("dob").innerText = "Date of Birth: May 5, 2010";
+            }
+        }
+    </script>
 </body>
 </html>
