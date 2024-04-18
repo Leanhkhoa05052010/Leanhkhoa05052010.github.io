@@ -95,7 +95,7 @@
 <div class="footer center">
     <div class="w-container">
         <div class="footer-text">Make By GitHub
-            <div class="footer-text">Version 2.1 release</div>
+            <div class="footer-text">Version 1.1 release</div>
         </div>
     </div>
 </div>
@@ -103,111 +103,138 @@
 <canvas id="fireworksCanvas"></canvas>
 
 <script>
-    // Fireworks animation function
+    // Fireworks animation
     function fireworksAnimation() {
         const canvas = document.getElementById('fireworksCanvas');
         const ctx = canvas.getContext('2d');
-        const particles = [];
-        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Particle class
-        class Particle {
-            constructor() {
-                this.x = canvas.width / 2;
-                this.y = canvas.height;
-                this.vx = Math.random() * 10 - 5;
-                this.vy = Math.random() * -15 - 10;
-                this.gravity = 0.2;
-                this.alpha = 1;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.vy += this.gravity;
-                this.alpha -= 0.01;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.alpha;
-                ctx.fill();
-            }
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
         }
 
-        // Create particles
-        function createParticles() {
+        function Firework() {
+            this.x = canvas.width / 2;
+            this.y = canvas.height;
+            this.xEnd = random(0, canvas.width);
+            this.yEnd = random(0, canvas.height / 2);
+            this.radius = 1;
+            this.speed = random(1, 5);
+            this.acceleration = 1.05;
+            this.distanceToEnd = Math.sqrt((this.xEnd - this.x) ** 2 + (this.yEnd - this.y) ** 2);
+            this.angle = Math.atan2(this.yEnd - this.y, this.xEnd - this.x);
+            this.dx = Math.cos(this.angle) * this.speed;
+            this.dy = Math.sin(this.angle) * this.speed;
+            this.life = true;
+        }
+
+        Firework.prototype.update = function () {
+            this.dx *= this.acceleration;
+            this.dy *= this.acceleration;
+            this.distanceToEnd = Math.sqrt((this.xEnd - this.x) ** 2 + (this.yEnd - this.y) ** 2);
+
+            if (this.distanceToEnd <= 50) {
+                this.life = false;
+                createParticles(this.xEnd, this.yEnd);
+            }
+
+            this.x += this.dx;
+            this.y += this.dy;
+        };
+
+        Firework.prototype.draw = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            ctx.fill();
+        };
+
+        function Particle(x, y) {
+            this.x = x;
+            this.y = y;
+            this.dx = random(-1, 1);
+            this.dy = random(-1, 1);
+            this.radius = random(1, 4);
+            this.life = 100;
+        }
+
+        Particle.prototype.update = function () {
+            this.x += this.dx;
+            this.y += this.dy;
+            this.life -= 1;
+        };
+
+        Particle.prototype.draw = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            ctx.fill();
+        };
+
+        const fireworks = [];
+        const particles = [];
+
+        function createParticles(x, y) {
             for (let i = 0; i < 50; i++) {
-                particles.push(new Particle());
+                const particle = new Particle(x, y);
+                particles.push(particle);
             }
         }
 
-        // Animate particles
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((particle, index) => {
-                particle.update();
-                particle.draw();
-                if (particle.alpha <= 0) {
-                    particles.splice(index, 1);
+        function handleParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                    i--;
                 }
-            });
-
-            requestAnimationFrame(animateParticles);
+            }
         }
 
-        // Start animation
-        createParticles();
-        animateParticles();
+        function handleFireworks() {
+            for (let i = 0; i < fireworks.length; i++) {
+                fireworks[i].update();
+                fireworks[i].draw();
+
+                if (!fireworks[i].life) {
+                    fireworks.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            handleFireworks();
+            handleParticles();
+
+            if (Math.random() < 0.03) {
+                fireworks.push(new Firework());
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     }
 
-    fireworksAnimation(); // Start the fireworks animation
-
-    // Function to calculate next birthday
-    function getNextBirthday() {
-        // Get today's date
+    // Function to check if it's the user's birthday
+    function isBirthday() {
         const today = new Date();
-
-        // Set the next birthday date (assuming next birthday is in 2022)
-        let nextBirthdayYear = today.getFullYear();
-        const birthdayMonth = 4; // May is 4th month (0-indexed)
-        const birthdayDay = 5;
-        let nextBirthday = new Date(nextBirthdayYear, birthdayMonth, birthdayDay);
-
-        // If next birthday has already passed this year, set it to next year
-        if (today.getTime() > nextBirthday.getTime()) {
-            nextBirthdayYear++;
-            nextBirthday = new Date(nextBirthdayYear, birthdayMonth, birthdayDay);
-        }
-
-        return nextBirthday;
+        const birthday = new Date(today.getFullYear(), 4, 5); // Assuming May 5th is the birthday
+        return today.getMonth() === birthday.getMonth() && today.getDate() === birthday.getDate();
     }
 
-    // Function to calculate countdown
-    function calculateCountdown() {
-        const nextBirthday = getNextBirthday();
-        const difference = nextBirthday - new Date();
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("countdown").innerHTML = `
-            <p>Countdown to your next birthday:</p>
-            <p>${days} days ${hours} hours ${minutes} minutes ${seconds} seconds</p>
-        `;
+    // Trigger fireworks animation if it's the user's birthday
+    if (isBirthday()) {
+        fireworksAnimation();
     }
-
-    // Call calculateCountdown every second
-    calculateCountdown();
-    setInterval(calculateCountdown, 1000);
 </script>
 
 </body>
