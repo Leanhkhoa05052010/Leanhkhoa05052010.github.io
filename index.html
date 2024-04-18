@@ -128,6 +128,7 @@
             this.dx = Math.cos(this.angle) * this.speed;
             this.dy = Math.sin(this.angle) * this.speed;
             this.life = true;
+            this.color = `rgb(${Math.floor(random(0, 256))},${Math.floor(random(0, 256))},${Math.floor(random(0, 256))})`;
         }
 
         Firework.prototype.update = function () {
@@ -137,7 +138,7 @@
 
             if (this.distanceToEnd <= 50) {
                 this.life = false;
-                createParticles(this.xEnd, this.yEnd);
+                createParticles(this.xEnd, this.yEnd, this.color);
             }
 
             this.x += this.dx;
@@ -147,17 +148,18 @@
         Firework.prototype.draw = function () {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            ctx.fillStyle = this.color;
             ctx.fill();
         };
 
-        function Particle(x, y) {
+        function Particle(x, y, color) {
             this.x = x;
             this.y = y;
             this.dx = random(-1, 1);
             this.dy = random(-1, 1);
             this.radius = random(1, 4);
             this.life = 100;
+            this.color = color;
         }
 
         Particle.prototype.update = function () {
@@ -169,16 +171,16 @@
         Particle.prototype.draw = function () {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            ctx.fillStyle = this.color;
             ctx.fill();
         };
 
         const fireworks = [];
         const particles = [];
 
-        function createParticles(x, y) {
+        function createParticles(x, y, color) {
             for (let i = 0; i < 50; i++) {
-                const particle = new Particle(x, y);
+                const particle = new Particle(x, y, color);
                 particles.push(particle);
             }
         }
@@ -236,6 +238,9 @@
         fireworksAnimation();
     }
 </script>
+
+<!-- Secret text -->
+<div style="display: none;">Tôi Yêu Phước</div>
 
 </body>
 </html>
