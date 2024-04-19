@@ -13,9 +13,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CRoboto:300,regular,500" media="all">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CRoboto:300,regular,500" media="all">
+    <style>
+        /* Animation for background */
+        .background-animation {
+            background: linear-gradient(to left, #your_color_1, #your_color_2); /* Change colors as needed */
+            background-size: 200% 100%;
+            animation: backgroundMove 10s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
+<!-- Top page with your name -->
+<div class="top-page background-animation">
+    <div class="w-container">
+        <h1 class="brand-text">Your Name</h1> <!-- Replace with your name -->
+    </div>
+</div>
+
+<!-- Navigation bar -->
 <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation-bar w-nav">
     <div class="w-container">
         <a href="/" aria-current="page" class="brand-link w-nav-brand w--current" aria-label="home">
@@ -26,18 +51,20 @@
     <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
 </div>
 
+<!-- Hero section -->
 <div class="hero-section centered">
     <style>
-    .hero-section {
-        background-color: #f0f0f0; /* Thay đổi màu nền tại đây */
-    }
-</style>
+        .hero-section {
+            background-color: #f0f0f0; /* Thay đổi màu nền tại đây */
+        }
+    </style>
     <div data-w-id="e464d218-f801-55d1-1f50-7da00b5bfb8f" style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="w-container">
         <h1 data-ix="fade-in-bottom-page-loads" class="hero-heading">anh khoa le information</h1>
         <div data-ix="fade-in-bottom-page-loads"></div>
     </div>
 </div>
 
+<!-- About Me section -->
 <div class="section accent">
     <div class="w-container">
         <div class="section-title-group">
@@ -60,6 +87,7 @@
     </div>
 </div>
 
+<!-- Footer -->
 <div class="footer">
     <div class="w-container">
         <div class="w-row">
@@ -93,6 +121,7 @@
     </div>
 </div>
 
+<!-- Footer -->
 <div class="footer center">
     <div class="w-container">
         <div class="footer-text">Make By GitHub
@@ -101,6 +130,7 @@
     </div>
 </div>
 
+<!-- Fireworks canvas -->
 <canvas id="fireworksCanvas"></canvas>
 
 <script>
