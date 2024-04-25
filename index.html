@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css" />
+var items = new vis.DataSet([
+    {id: 1, content: 'BIRTHAY', start: '2010-05-05'},
+    {id: 2, content: 'FIRST DAY AT PRIMARY SCHOOL', start: '2016-08-01'},
+    {id: 3, content: 'FIRST DAY AT SECONDARY SCHOOL', start: '2022-08-01'}
+]);
+
 <html data-wf-domain="anh-khoas-exceptional-site.webflow.io" data-wf-page="66209fe98a43ff474aa0b1db" data-wf-site="66209fe98a43ff474aa0b1a0" data-wf-status="1" class="w-mod-js w-mod-ix wf-opensans-n3-active wf-opensans-i3-active wf-opensans-n4-active wf-opensans-i4-active wf-opensans-n6-active wf-opensans-i6-active wf-opensans-n7-active wf-opensans-i7-active wf-opensans-n8-active wf-opensans-i8-active wf-roboto-n3-active wf-roboto-n4-active wf-roboto-n5-active wf-active w-mod-js">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -55,11 +63,20 @@
                     <h3 class="white-text">BIRTHDAY</h3>
                     <p class="white-text">MAY 5, 2010</p>
                 </div>
-            
-            </div>
-        </div>
-    </div>
-</div>
+                <h2 class="IMPORTANT TIME">IMPORTANT TIME</h2>
+                    var container = document.getElementById('timeline');
+                    
+                    var options = {
+                        // Tùy chỉnh các tuỳ chọn theo ý muốn của bạn
+                    };
+                    
+                    var timeline = new vis.Timeline(container, items, options);
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div id="timeline"></div>
 
 <div class="footer">
     <div class="w-container">
