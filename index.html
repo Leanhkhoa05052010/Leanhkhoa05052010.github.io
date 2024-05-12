@@ -10,11 +10,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="Webflow" name="generator">
     <link href="https://assets-global.website-files.com/66209fe98a43ff474aa0b1a0/css/anh-khoas-exceptional-site.webflow.3186d73b9.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CRoboto:300,regular,500" media="all">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CRoboto:300,regular,500" media="all">
 </head>
 <body>
 
@@ -30,15 +25,18 @@
 
 <div class="hero-section centered">
     <style>
-    .hero-section {
-        background-color: #f0f0f0; /* Thay đổi màu nền tại đây */
-    }
-</style>
-    <div data-w-id="e464d218-f801-55d1-1f50-7da00b5bfb8f" style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" class="w-container">
-        <h1 data-ix="fade-in-bottom-page-loads" class="hero-heading">anh khoa le information</h1>
-        <div data-ix="fade-in-bottom-page-loads"></div>
+        .w-container {
+            margin: 0 auto; /* Để căn giữa theo chiều ngang */
+            text-align: center; /* Để căn giữa nội dung bên trong theo chiều ngang */
+            background-image: url('437903910_331594189941689_5235354681348811075_n.png'); /* Thay 'đường_dẫn_đến_hình_ảnh' bằng đường dẫn thực tế đến hình ảnh bạn muốn sử dụng làm hình nền */
+            background-size: cover; /* Để hình nền được phóng to hoặc thu nhỏ sao cho nó phù hợp với kích thước của phần tử */
+            background-position: center; /* Để căn giữa hình nền */
+                <h1 class="hero-heading">anh khoa le information</h1>
+        }
+    </style>
+        <h1 class="hero-heading">anh khoa le information</h1>
     </div>
-</div>
+</div>    
 
 <div class="section accent">
     <div class="w-container">
@@ -57,7 +55,9 @@
                     <h3 class="white-text">BIRTHDAY</h3>
                     <p class="white-text">MAY 5, 2010</p>
                 </div>
-
+            </div>
+        </div>
+    </div>
 <div class="footer">
     <div class="w-container">
         <div class="w-row">
@@ -100,6 +100,35 @@
 <div class="footer-text centered-text">Make By GitHub
     <div class="footer-text">VERSION 05.05.2024-RELEASE</div>
 </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    function checkPassword() {
+    var password = document.getElementById("passwordInput").value;
+
+    // Check if the entered password is correct
+    if (password === "hehe") {
+        // If correct, open YouTube video in a new tab
+        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+    } else {
+        // If incorrect, show an alert message
+        alert("Incorrect password. Please try again.");
+    }
+}
 
 <canvas id="fireworksCanvas"></canvas>
 
