@@ -26,11 +26,11 @@
 <div class="hero-section centered">
     <style>
         .w-container {
-            margin: 0 auto; /* Để căn giữa theo chiều ngang */
-            text-align: center; /* Để căn giữa nội dung bên trong theo chiều ngang */
-            background-image: url('437903910_331594189941689_5235354681348811075_n.png'); /* Thay 'đường_dẫn_đến_hình_ảnh' bằng đường dẫn thực tế đến hình ảnh bạn muốn sử dụng làm hình nền */
-            background-size: cover; /* Để hình nền được phóng to hoặc thu nhỏ sao cho nó phù hợp với kích thước của phần tử */
-            background-position: center; /* Để căn giữa hình nền */
+            margin: 0 auto; 
+            text-align: center;  
+            background-image: url('437903910_331594189941689_5235354681348811075_n.png');
+            background-size: cover;  
+            background-position: center;
                 <h1 class="hero-heading">anh khoa le information</h1>
         }
     </style>
@@ -106,7 +106,7 @@
 <body>
 
 <div class="footer-text centered-text">Make By GitHub
-    <div class="footer-text">VERSION 05.05.2024-RELEASE</div>
+    <div class="footer-text">VERSION DON'T ENTER HEHE</div>
 </div>
 
 <div class="password-box">
@@ -117,13 +117,10 @@
 <script>
     function checkPassword() {
         var password = document.getElementById("passwordInput").value;
-
-        // Check if the entered password is correct
         if (password === "HEHE") {
-            // If correct, open YouTube video in a new tab
             window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
         } else {
-            // If incorrect, show an alert message
+
             alert("Incorrect password. Please try again.");
         }
     }
@@ -258,14 +255,13 @@
         animate();
     }
 
-    // Function to check if it's the user's birthday
     function isBirthday() {
         const today = new Date();
-        const birthday = new Date(today.getFullYear(), 4, 5); // Assuming May 5th is the birthday
+        const birthday = new Date(today.getFullYear(), 4, 5);
         return today.getMonth() === birthday.getMonth() && today.getDate() === birthday.getDate();
     }
 
-    // Trigger fireworks animation if it's the user's birthday
+
     if (isBirthday()) {
         fireworksAnimation();
     }
