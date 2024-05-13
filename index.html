@@ -96,10 +96,19 @@
         </div>              
     </div>
 </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Check</title>
+</head>
+<body>
+
 <div class="footer-text centered-text">Make By GitHub
     <div class="footer-text">VERSION 05.05.2024-RELEASE</div>
 </div>
+
 <div class="password-box">
     <input type="password" id="passwordInput" placeholder="Enter Password">
     <button onclick="checkPassword()">Submit</button>
@@ -107,17 +116,21 @@
 
 <script>
     function checkPassword() {
-    var password = document.getElementById("passwordInput").value;
+        var password = document.getElementById("passwordInput").value;
 
-    // Check if the entered password is correct
-    if (password === "hehe") {
-        // If correct, open YouTube video in a new tab
-        window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-    } else {
-        // If incorrect, show an alert message
-        alert("Incorrect password. Please try again.");
+        // Check if the entered password is correct
+        if (password === "hehe") {
+            // If correct, open YouTube video in a new tab
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+        } else {
+            // If incorrect, show an alert message
+            alert("Incorrect password. Please try again.");
+        }
     }
-}
+</script>
+
+</body>
+</html>
 
 <canvas id="fireworksCanvas"></canvas>
 
