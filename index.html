@@ -11,6 +11,17 @@
     <meta content="Webflow" name="generator">
     <link href="https://assets-global.website-files.com/66209fe98a43ff474aa0b1a0/css/anh-khoas-exceptional-site.webflow.3186d73b9.css" rel="stylesheet" type="text/css">
 </head>
+<head>
+<script>
+    function saveTime() {
+          var time = new Date();
+          var sheet = SpreadsheetApp.create("Thời gian truy cập trang web");
+          var sheet1 = sheet.getSheets()[0];
+          sheet1.appendRow([time]);
+    }
+  </script>
+</head>
+
 <body>
 
 <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation-bar w-nav">
@@ -265,33 +276,17 @@
     if (isBirthday()) {
         fireworksAnimation();
     }
-<script>
+function saveTime() {
+  // Lấy thời gian hiện tại.
+  var time = new Date();
 
-</body>
-</html>
-// Replace with your Google Sheets API Key
-const apiKey = 'AIzaSyDEBHzl0A6ADzx6iqOkEYcPXg4GoCIXqmw';
+  // Tạo một Google Sheet mới.
+  var sheet = SpreadsheetApp.create("WEBLOGIN");
 
-// Replace with your Google Sheets File ID
-const fileId = 'AIzaSyDEBHzl0A6ADzx6iqOkEYcPXg4GoCIXqmw';
+  // Lấy trang tính đầu tiên trong bảng tính.
+  var sheet1 = sheet.getSheets()[0];
 
-function recordAccessTime() {
-    const currentTime = new Date().toLocaleString();
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/Sheet1!A1:A1:append?valueInputOption=USER_ENTERED&key=${apiKey}`;
-    const data = {
-        values: [[currentTime]]
-    };
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => console.log('Access time recorded successfully'))
-    .catch(error => console.error('Error recording access time:', error));
+  // Thêm thời gian vào trang tính.
+  sheet1.appendRow([time]);
 }
 
-// Call recordAccessTime when the page loads
-recordAccessTime();
