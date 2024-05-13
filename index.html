@@ -265,7 +265,33 @@
     if (isBirthday()) {
         fireworksAnimation();
     }
-</script>
+<script>
 
 </body>
 </html>
+// Replace with your Google Sheets API Key
+const apiKey = 'AIzaSyDEBHzl0A6ADzx6iqOkEYcPXg4GoCIXqmw';
+
+// Replace with your Google Sheets File ID
+const fileId = 'AIzaSyDEBHzl0A6ADzx6iqOkEYcPXg4GoCIXqmw';
+
+function recordAccessTime() {
+    const currentTime = new Date().toLocaleString();
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/Sheet1!A1:A1:append?valueInputOption=USER_ENTERED&key=${apiKey}`;
+    const data = {
+        values: [[currentTime]]
+    };
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then(response => console.log('Access time recorded successfully'))
+    .catch(error => console.error('Error recording access time:', error));
+}
+
+// Call recordAccessTime when the page loads
+recordAccessTime();
