@@ -131,8 +131,11 @@
         if (password === "HEHE") {
             window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
         } else {
-
-            alert("Incorrect password. Please try again.");
+            if (password === "MONEY") {
+            window.open("https://i.pinimg.com/originals/1a/54/e5/1a54e518e8c89a0ef3b4e47f6070ec71.gif", "_blank");
+        } else {
+        }
+    }
         }
     }
 </script>
@@ -276,17 +279,4 @@
     if (isBirthday()) {
         fireworksAnimation();
     }
-function saveTime() {
-  // Lấy thời gian hiện tại.
-  var time = new Date();
-
-  // Tạo một Google Sheet mới.
-  var sheet = SpreadsheetApp.create("WEBLOGIN");
-
-  // Lấy trang tính đầu tiên trong bảng tính.
-  var sheet1 = sheet.getSheets()[0];
-
-  // Thêm thời gian vào trang tính.
-  sheet1.appendRow([time]);
-}
 
